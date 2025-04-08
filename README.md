@@ -1,3 +1,21 @@
+# Submission by Adam Ahmetasevic
+First, thank you for the opportunity to complete this technical assessment! It was a fun and well-scoped challenge, and I enjoyed working with Material UI and Next.js to bring it to life.
+
+The following is my completed version of the Dwolla Software Engineering Intern assessment. It includes:
+
+-A responsive, accessible customer table built with Material UI
+
+-A fully functional "Add Customer" dialog
+
+-Realtime list updates using SWR + mutate
+
+-Clean layout with subtle UX enhancements for a polished experience
+
+## Final Result:
+![MyTable](/mocks/TableImage.png)
+
+
+
 # Dwolla Software Engineering Intern Technical Assessment
 
 Thank you for applying to be one of our interns this summer! You've made it past the initial resume screen and now we want to see what you can do!
