@@ -159,6 +159,7 @@ const Home = () => {
         <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
           <DialogTitle>Add a New Customer</DialogTitle>
           <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: 2, mt: 1 }}>
+            <Box sx = {{display: 'flex', gap: 2}}>
             <TextField
               label="First Name"
               name="firstName"
@@ -176,6 +177,15 @@ const Home = () => {
               required
             />
             <TextField
+              label="Business Name"
+              name="businessName"
+              value={formData.businessName}
+              onChange={handleChange}
+              fullWidth
+            />
+
+          </Box>
+            <TextField
               label="Email"
               name="email"
               value={formData.email}
@@ -184,13 +194,7 @@ const Home = () => {
               required
               type="email"
             />
-            <TextField
-              label="Business Name"
-              name="businessName"
-              value={formData.businessName}
-              onChange={handleChange}
-              fullWidth
-            />
+            
           </DialogContent>
           <DialogActions>
             <Button onClick={() => setDialogOpen(false)}>Cancel</Button>
