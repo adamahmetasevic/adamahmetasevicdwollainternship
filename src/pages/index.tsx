@@ -1,8 +1,30 @@
 import Head from 'next/head';
 import useSWR from 'swr';
-import { Box } from '@mui/material';
-// Icon for Add Customer button
+import {
+  Box,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  IconButton,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TextField,
+  Typography,
+  Paper,
+} from '@mui/material';
+import { useState } from 'react';
 import { AddRounded } from '@mui/icons-material';
+
+
+
+// Main customer list page for the tech assessment
+// Displays customers in a table and allows adding new ones
 
 export type Customer = {
   firstName: string;
@@ -18,20 +40,20 @@ export type ApiError = {
   message: string;
 };
 
+
+const fetcher = async(url: string) => {
+  const response = await fetch(url);
+  const body = await response.json();
+  if (!response.ok) throw body;
+  return body;
+}
 const Home = () => {
-  // SWR is a great library for geting data, but is not really a solution
-  // for POST requests. You'll want to use either another library or
-  // the Fetch API for adding new customers.
-  const fetcher = async (url: string) => {
-    const response = await fetch(url);
-    const body = await response.json();
-    if (!response.ok) throw body;
-    return body;
-  };
   const { data, error, isLoading } = useSWR<Customers, ApiError>(
     '/api/customers',
     fetcher
   );
+
+
 
   return (
     <>
