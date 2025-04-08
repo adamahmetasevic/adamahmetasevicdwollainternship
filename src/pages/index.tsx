@@ -98,23 +98,108 @@ const Home = () => {
         <title>Dwolla | Customers</title>
       </Head>
       <main>
-        <Box>
-          {isLoading && <p>Loading...</p>}
-          {error && <p>Error: {error.message}</p>}
-          {data && (
-            <ul>
-              {data.map(customer => (
-                <li key={customer.email}>
-                  {customer.firstName} {customer.lastName}
-                </li>
-              ))}
-            </ul>
-          )}
-        </Box>
+      <Box sx={{ p: 4, display: 'flex', justifyContent: 'center' }}>
+  <Paper
+    elevation={3}
+    sx={{
+      width: '100%',
+      maxWidth: 900, // Makes the margin box less wide
+      p: 3,
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 2,
+    }}
+  >
+    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <Typography variant="h6">
+        Total Customers: {data?.length || 0}
+      </Typography>
+      <Button
+        variant="contained"
+        startIcon={<AddRounded />}
+        onClick={() => setDialogOpen(true)}
+      >
+        Add Customer
+      </Button>
+    </Box>
+
+    {isLoading && <Typography>Loading...</Typography>}
+    {error && <Typography color="error">Error: {error.message}</Typography>}
+
+    {data && (
+      <TableContainer component={Paper} elevation={1}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>First Name</TableCell>
+              <TableCell>Last Name</TableCell>
+              <TableCell>Email</TableCell>
+              <TableCell>Business Name</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {data.map((customer) => (
+              <TableRow key={customer.email}>
+                <TableCell>{customer.firstName}</TableCell>
+                <TableCell>{customer.lastName}</TableCell>
+                <TableCell>{customer.email}</TableCell>
+                <TableCell>{customer.businessName || '-'}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    )}
+  </Paper>
+</Box>
+
+
+        {/* Dialog -> Pops open when the "Add Customer" button is clicked */}
+
+        <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
+          <DialogTitle>Add a New Customer</DialogTitle>
+          <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: 2, mt: 1 }}>
+            <TextField
+              label="First Name"
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleChange}
+              fullWidth
+              required
+            />
+            <TextField
+              label="Last Name"
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleChange}
+              fullWidth
+              required
+            />
+            <TextField
+              label="Email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              fullWidth
+              required
+              type="email"
+            />
+            <TextField
+              label="Business Name"
+              name="businessName"
+              value={formData.businessName}
+              onChange={handleChange}
+              fullWidth
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setDialogOpen(false)}>Cancel</Button>
+            <Button onClick={handleSubmit} variant="contained">Add</Button>
+          </DialogActions>
+        </Dialog>
       </main>
     </>
   );
 };
- 
 
 export default Home;
