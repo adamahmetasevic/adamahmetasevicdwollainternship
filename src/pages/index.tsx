@@ -167,6 +167,7 @@ const Home = () => {
               onChange={handleChange}
               fullWidth
               required
+              
             />
             <TextField
               label="Last Name"
@@ -197,9 +198,14 @@ const Home = () => {
             
           </DialogContent>
           <DialogActions>
-            <Button onClick={() => setDialogOpen(false)}>Cancel</Button>
-            <Button onClick={handleSubmit} variant="contained">Add</Button>
-          </DialogActions>
+  <Button onClick={() => { 
+    setDialogOpen(false); 
+    setFormData({ firstName: '', lastName: '', email: '', businessName: '' }); // Clear fields on cancel
+  }}>
+    Cancel
+  </Button>
+  <Button onClick={handleSubmit} variant="contained">Add</Button>
+</DialogActions>
         </Dialog>
       </main>
     </>
